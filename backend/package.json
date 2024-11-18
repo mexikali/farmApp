@@ -1,0 +1,12 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "FarmApp backend",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "Ömer Faruk Sezen",
+  "license": "ISC"
+}
