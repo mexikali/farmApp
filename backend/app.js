@@ -2,9 +2,11 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const dotenv = require('dotenv');
 
 
 const app = express();
+dotenv.config();
 
 // DB Connection
 mongoose.connect('mongodb://localhost/farmApp-db').then( () => {
@@ -18,7 +20,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(session({
-    secret: 'farmAppSecretKey',
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     store: MongoStore.create({mongoUrl: 'mongodb://localhost/farmApp-db'})
@@ -31,7 +33,7 @@ app.use('/', (req, res) => {
 });
 
 
-const port = 5000;
+const port = process.env.PORT;
 app.listen(port, () => {
     console.log("FarmApp Backend is running on port:",port);
     console.log(`http://localhost:${port}/`);
